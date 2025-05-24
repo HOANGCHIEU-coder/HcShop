@@ -1,0 +1,88 @@
+/* admin_dashboard.css */
+
+/* Tổng quan giao diện */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* Thanh điều hướng bên trái (Sidebar) */
+.sidebar {
+    background-color: #343a40;
+    color: #fff;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    z-index: 1000;
+}
+.sidebar .nav-item a {
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+}
+.sidebar .nav-item a:hover {
+    background-color: #007bff;
+}
+.sidebar .nav-item a.active {
+    background-color: #007bff;
+}
+
+/* Phần nội dung chính */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Navbar phía trên */
+.navbar-custom {
+    background-color: #007bff;
+    padding: 15px;
+}
+.navbar-custom .navbar-brand {
+    color: #fff;
+}
+
+/* Các phần thông tin trên Dashboard */
+.card {
+    border: none;
+    margin: 20px 0;
+}
+.card-body {
+    padding: 20px;
+}
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.card-text {
+    font-size: 1.125rem;
+}
+
+/* Các nút hành động trong dashboard */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    padding: 20px 0;
+    background-color: #343a40;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+footer p {
+    margin: 0;
+}

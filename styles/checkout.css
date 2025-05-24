@@ -1,0 +1,120 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 40px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: #3498db;
+  color: #fff !important;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 18px;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.08);
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #217dbb;
+  color: #fff;
+  text-decoration: none;
+}
+.checkout-container {
+  max-width: 900px;
+  background: white;
+  margin: auto;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+h1,
+h2 {
+  text-align: center;
+  color: #333;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+.submit-btn {
+  width: 100%;
+  background: #28a745;
+  color: white;
+  padding: 14px;
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.submit-btn:hover {
+  background: #218838;
+}
+.success {
+  text-align: center;
+  background: #e6ffee;
+  padding: 30px;
+  border-radius: 12px;
+  margin-top: 30px;
+}
+.success h2 {
+  color: #28a745;
+}
+.back-home {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: #3498db;
+  color: #fff !important;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 18px;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.08);
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #217dbb;
+  color: #fff;
+  text-decoration: none;
+}

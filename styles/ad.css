@@ -1,0 +1,218 @@
+
+/* Sidebar (Menu bên trái) */
+.sidebar {
+    background: linear-gradient(45deg, #8e44ad, #3498db, #ff69b4); /* Dải màu hồng tím */
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    z-index: 1000;
+    padding-top: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 15px 0 0 15px; /* Bo góc nhẹ */
+    box-sizing: border-box; /* Đảm bảo không bị lệch ngoài */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Đảm bảo các item dãn đều từ trên xuống dưới */
+    gap: 15px; /* Khoảng cách giữa các item */
+}
+
+/* Các phần tử menu */
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+/* Các liên kết menu */
+.nav-item a {
+    display: block;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box; /* Đảm bảo không bị lệch */
+}
+
+/* Hiệu ứng hover cho nav-item */
+.nav-item a:hover {
+    background-color: #e91e63; /* Màu hồng đậm khi hover */
+    color: #fff;
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+}
+
+/* Menu item active */
+.nav-item a.active {
+    background-color: #e91e63; /* Màu hồng đậm khi active */
+    color: white;
+    transform: scale(1.05); /* Phóng to nhẹ khi active */
+}
+
+/* Sidebar title */
+.sidebar h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Admin Section */
+.admin-section {
+    margin-left: 250px;
+    padding: 20px;
+    background: linear-gradient(45deg, #f8f9fa, #f1f1f1); /* Gradient nền nhẹ nhàng */
+    min-height: 100vh;
+    border-radius: 15px;
+}
+
+/* Header */
+.admin-header {
+    background: linear-gradient(45deg, #ff69b4, #8e44ad); /* Dải màu gradient */
+    padding: 20px;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Menu item */
+.nav-item {
+    width: 100%;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Đảm bảo không bị lấn sang ngoài */
+}
+.nav-item a {
+    display: block;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box; /* Đảm bảo không bị lệch */
+}
+
+.nav-item a:hover, .nav-item a.active {
+    background-color: #e91e63; /* Màu hồng đậm cho hiệu ứng hover */
+    color: #fff;
+    transform: translateX(5px); /* Đẩy nhẹ khi hover */
+    padding-left: 30px; /* Giảm bớt hiệu ứng mở rộng khi hover */
+}
+/* Sidebar title */
+.sidebar h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+/* Active item */
+.nav-item a.active {
+    background-color: #e91e63; /* Màu hồng đậm khi active */
+    color: white;
+    transform: scale(1.05); /* Phóng to nhẹ khi active */
+}
+
+
+/* Admin Section */
+.admin-section {
+    margin-left: 250px;
+    padding: 20px;
+    background: linear-gradient(45deg, #f8f9fa, #f1f1f1); /* Gradient nền nhẹ nhàng */
+    min-height: 100vh;
+    border-radius: 15px;
+}
+
+/* Header */
+.admin-header {
+    background: linear-gradient(45deg, #ff69b4, #8e44ad); /* Dải màu gradient */
+    padding: 20px;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Card */
+.card {
+    margin-bottom: 20px;
+    border: 0;
+    border-radius: 15px; /* Bo góc cho card */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: #fff; /* Nền trắng cho card */
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #8e44ad;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    padding: 10px 0;
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    border-radius: 0 0 15px 15px; /* Bo góc cho footer */
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: #ff69b4; /* Màu hồng khi hover */
+}
+
+/* Thêm hiệu ứng cho nút đăng xuất */
+button.logout {
+    background-color: #e91e63;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button.logout:hover {
+    background-color: #ff4081;
+}
+
+
+

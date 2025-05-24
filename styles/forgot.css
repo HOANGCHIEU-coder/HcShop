@@ -1,0 +1,107 @@
+/* Căn giữa và định dạng các phần tử */
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ff6b6b, #8e44ad, #f39c12, #e74c3c);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    background-size: 400% 400%; /* Mở rộng kích thước nền */
+    transition: background-position 0.4s ease-in-out; /* Hiệu ứng chuyển động mượt mà */
+}
+
+/* Khi hover */
+button:hover {
+    background-position: 100% 100%; /* Đổi vị trí nền khi hover để tạo hiệu ứng di chuyển */
+}
+
+a {
+    font-size: 14px;
+    color: #3498db;
+    text-decoration: none;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Error and success messages */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Tạo khoảng cách giữa các form */
+form {
+    margin-bottom: 20px;
+}
+
+/* Thông báo thành công */
+.success-message {
+    font-size: 16px;
+    color: #27ae60;
+}

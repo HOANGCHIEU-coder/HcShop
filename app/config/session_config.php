@@ -1,0 +1,5 @@
+<?php
+// Cấu hình session (tự động bật session nếu chưa bật)
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}

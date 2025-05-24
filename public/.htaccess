@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /HCShopTest/public/
+
+# Rewrite tất cả URL trừ file/thư mục thật
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
