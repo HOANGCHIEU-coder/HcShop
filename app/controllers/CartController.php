@@ -33,16 +33,20 @@ class CartController
 
             // Xem đơn hàng đã đặt
             if (isset($_POST['view_orders'])) {
-                $db = new Database();
-                $conn = $db->getConnection();
+            $db = new Database();
+            $conn = $db->getConnection();
 
-                $user_id = (int)$_SESSION['user_id'];
-                $sql = "SELECT * FROM orders WHERE user_id = $user_id ORDER BY id DESC";
-                $result = $conn->query($sql);
+            $user_id = (int) $_SESSION['user_id'];
+            $sql = "SELECT * FROM orders WHERE user_id = $user_id ORDER BY id DESC";
+            $result = $conn->query($sql);
 
-                header('Location: /HCShopTest/public/CartController/index');
-                exit;
+            $orders = [];
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $orders[] = $row;
+                }
             }
+        }
 
         }
 

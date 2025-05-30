@@ -328,73 +328,67 @@
             </table>
 
             <!-- QLy người dùng-->
-        <?php elseif ($action === 'manage-users'): ?>
-            <h2>👤 Quản lý người dùng</h2>
-            <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px; color: #000; background-color: #fff;">
-                <thead>
-                    <tr style="background-color: #eee;">
-                        <th>ID</th>
-                        <th>Tên người dùng</th>
-                        <th>Email</th>
-                        <th>Vai trò</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($users)): ?>
-                        <?php foreach ($users as $row): ?>
-                            <tr>
-                                <td><?= $row['id'] ?></td>
-                                <td><?= $row['name'] ?></td>
-                                <td><?= $row['email'] ?></td>
-                                <td><?= $row['role'] ?></td>
-                                <td>
-                                    <a href="/HCShopTest/public/AdminController/delete_user?id=<?= $row['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
-                                        <button style="color: red;">Xóa</button>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="5">Không có người dùng nào.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-
-            <!--Phần Contact -->
-            <?php if ($action === 'manage-contact'): ?>
-                <h2>📩 Thông báo từ khách hàng</h2>
-                <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px auto;">
-                    <thead style="background: #eee;">
-                        <tr>
-                            <th>Tên</th>
+            <?php elseif ($action === 'manage-users'): ?>
+                <h2>👤 Quản lý người dùng</h2>
+                <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px; color: #000; background-color: #fff;">
+                    <thead>
+                        <tr style="background-color: #eee;">
+                            <th>ID</th>
+                            <th>Tên người dùng</th>
                             <th>Email</th>
-                            <th>Nội dung</th>
-                            <th>Ngày gửi</th>
+                            <th>Vai trò</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($contacts)): ?>
-                            <?php foreach ($contacts as $contact): ?>
+                        <?php if (!empty($users)): ?>
+                            <?php foreach ($users as $row): ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($contact['name']) ?></td>
-                                    <td><?= htmlspecialchars($contact['email']) ?></td>
-                                    <td><?= nl2br(htmlspecialchars($contact['message'])) ?></td>
-                                    <td><?= $contact['sent_at'] ?></td>
+                                    <td><?= $row['id'] ?></td>
+                                    <td><?= $row['name'] ?></td>
+                                    <td><?= $row['email'] ?></td>
+                                    <td><?= $row['role'] ?></td>
+                                    <td>
+                                        <a href="/HCShopTest/public/AdminController/delete_user?id=<?= $row['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                            <button style="color: red;">Xóa</button>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <tr>
-                                <td colspan="4">Không có tin nhắn nào.</td>
-                            </tr>
+                            <tr><td colspan="5">Không có người dùng nào.</td></tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
             <?php endif; ?>
-
-        <?php endif; ?>
+            <!--Phần Contact -->
+           <?php if ($action === 'manage-contact'): ?>
+               <h2>📩 Thông báo từ khách hàng</h2>
+               <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px auto;">
+                   <thead style="background: #eee;">
+                       <tr>
+                           <th>Tên</th>
+                           <th>Email</th>
+                           <th>Nội dung</th>
+                           <th>Ngày gửi</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <?php if (!empty($contacts)): ?>
+                           <?php foreach ($contacts as $contact): ?>
+                               <tr>
+                                   <td><?= htmlspecialchars($contact['name']) ?></td>
+                                   <td><?= htmlspecialchars($contact['email']) ?></td>
+                                   <td><?= nl2br(htmlspecialchars($contact['message'])) ?></td>
+                                   <td><?= $contact['sent_at'] ?></td>
+                               </tr>
+<?php endforeach; ?>
+                       <?php else: ?>
+                           <tr><td colspan="4">Không có tin nhắn nào.</td></tr>
+                       <?php endif; ?>
+                   </tbody>
+               </table>
+           <?php endif; ?>
     </div>
     <?php if (empty($action)): ?>
 
