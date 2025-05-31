@@ -39,8 +39,8 @@ class CheckoutController {
             $user_id  = (int)$_SESSION['user_id'];
 
             // Gọi Model để xử lý lưu đơn hàng
-            $order_id = Order::createOrder($conn, $user_id, $fullname, $phone, $address, $note, $items);
-            $_SESSION['last_order_id'] = $order_id;
+            $status_order = 'Chờ xử lý'; 
+            $order_id = Order::createOrder($conn, $user_id, $fullname, $phone, $address, $note, $items, $status_order);
 
             // Lưu thông tin để hiển thị ở trang cảm ơn
             $_SESSION['order_info'] = [

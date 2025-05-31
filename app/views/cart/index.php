@@ -43,6 +43,7 @@
                             <th>Địa chỉ</th>
                             <th>Ghi chú</th>
                             <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,6 +55,7 @@
                             <td><?php echo $row['address']; ?></td>
                             <td><?php echo $row['note']; ?></td>
                             <td><?php echo number_format($row['total'], 0, ',', '.'); ?>đ</td>
+                            <td><?= htmlspecialchars($row['status_order']) ?></td>
                         </tr>
                         <?php endwhile; ?>
                     </tbody>

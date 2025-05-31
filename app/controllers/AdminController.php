@@ -78,9 +78,18 @@ class AdminController
             $price = $_POST['price'];
             $new_size = $_POST['size'];
             $quantity = $_POST['quantity'];
-
-            Product::updateProductInfo($id, $name, $price);
-            Product::updateStockInfo($id, $original_size, $new_size, $quantity);
+            $filename = $_FILES["url"]["name"];
+            $target_dir = __DIR__ . "/../../public/images/";
+            $target_file = $target_dir . basename($filename);
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0777, true); // Tạo thư mục nếu chưa có
+            }
+            if (move_uploaded_file($_FILES["url"]["tmp_name"], $target_file)){
+                echo "Upload ảnh thành công!";
+                Product::updateProductInfo($id, $name, $price,$filename);
+                Product::updateStockInfo($id, $original_size, $new_size, $quantity);
+            }
+            
 
             if (
                 !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
@@ -104,17 +113,38 @@ class AdminController
             $image = $_POST['image'] ?? '';
             $size = $_POST['size'] ?? '';
             $quantity = $_POST['quantity'] ?? 0;
-
-            $ok = Product::insertWithSize($name, $price, $image, $size, $quantity);
-
-            if ($ok) {
-
-                header("Location: /HCShopTest/public/AdminController/dashboard?action=manage_products");
-                exit;
-            } else {
-                echo 'Lỗi thêm sản phẩm!';
-                exit;
+            $filename = $_FILES["url"]["name"];
+            $target_dir = __DIR__ . "/../../public/images/";
+            $target_file = $target_dir . basename($filename);
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0777, true); // Tạo thư mục nếu chưa có
             }
+            if (move_uploaded_file($_FILES["url"]["tmp_name"], $target_file)) {
+                echo  "Thêm hình ảnh thành công";
+
+
+                $ok = Product::insertWithSize($name, $price, $filename, $size, $quantity);
+
+                if ($ok) {
+
+                    header("Location: /HCShopTest/public/AdminController/dashboard?action=manage_products");
+                    exit;
+                } else {
+                    echo 'Lỗi thêm sản phẩm!';
+                    exit;
+                }
+            } else {
+                echo "Lỗi up load hình ảnh!";
+            }
+        }
+    }
+    public function update_order(){
+        if(isset($_POST['update_status'])){
+            $status = $_POST['status'];
+            $order_id = $_POST['order_id'];
+            Order::updateStatusOrder($order_id,$status);
+            header("Location: /HCShopTest/public/AdminController/dashboard?action=manage_orders");
+            exit;
         }
     }
 }

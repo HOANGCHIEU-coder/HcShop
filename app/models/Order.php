@@ -1,5 +1,10 @@
 <?php
 class Order {
+    private $conn; // Biến kết nối database
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
     public static function getOverviewStats() {
         $db = new Database();
         $conn = $db->getConnection();
@@ -19,7 +24,7 @@ class Order {
     public static function allWithDetails() {
         $db = new Database();
         $conn = $db->getConnection();
-        $sql = "SELECT orders.id AS order_id, users.name AS customer_name,
+        $sql = "SELECT orders.id AS order_id, users.name AS customer_name, status_order,
                        orders.created_at AS order_date,
                        order_items.product_name, order_items.price, order_items.quantity, order_items.size
                 FROM orders
@@ -32,16 +37,16 @@ class Order {
         }
         return $orders;
     }
-    public static function createOrder($conn, $user_id, $fullname, $phone, $address, $note, $items) {
+    public static function createOrder($conn, $user_id, $fullname, $phone, $address, $note, $items,$status_order) {
         $total = 0;
         foreach ($items as $item) {
             $total += $item['price'] * $item['quantity'];
         }
 
         // Tạo đơn hàng
-        $stmt = $conn->prepare("INSERT INTO orders (fullname, phone, address, note, total, user_id)
-                                VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssdi", $fullname, $phone, $address, $note, $total, $user_id);
+        $stmt = $conn->prepare("INSERT INTO orders (fullname, phone, address, note, total, user_id,status_order)
+                                VALUES (?, ?, ?, ?, ?, ?,?)");
+        $stmt->bind_param("ssssdis", $fullname, $phone, $address, $note, $total, $user_id,$status_order);
         $stmt->execute();
         $order_id = $stmt->insert_id;
 
@@ -63,5 +68,13 @@ class Order {
 
         return $order_id;
     }
-
+    public static function updateStatusOrder($id,$status_order){
+        $db = new Database();
+        $conn = $db->getConnection();
+        $sql = "UPDATE orders SET status_order = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $status_order,$id);
+        $stmt->execute();
+        $stmt->close();
+    }
 }

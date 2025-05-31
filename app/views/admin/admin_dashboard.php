@@ -128,7 +128,7 @@
                 </a>
             </div>
             <div class="nav-item">
-                <a href="/HCShopTest/public/login/logout" class="nav-link"><i class="fa fa-sign-out-alt"></i> Đăng xuất</a>
+                <a href="/HCShopTest/public/logout.php" class="nav-link"><i class="fa fa-sign-out-alt"></i> Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -178,7 +178,7 @@
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <h2 style="margin-bottom: 20px;">Thêm Sản Phẩm Mới</h2>
-                    <form id="addProductForm" action="/HCShopTest/public/AdminController/add_product" method="POST">
+                    <form id="addProductForm" action="/HCShopTest/public/AdminController/add_product" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Tên sản phẩm: <input type="text" name="name" required></label>
                         </div>
@@ -204,7 +204,7 @@
                             <label>Material: <input type="text" name="material"></label>
                         </div>
                         <div class="form-group">
-                            <label>Ảnh sản phẩm (URL): <input type="text" name="image" required></label>
+                            <label>Ảnh sản phẩm (URL): <input type="file" name="url" required></label>
                         </div>
                         <div class="form-group">
                             <label>Size: <input type="text" name="size" required></label>
@@ -257,7 +257,12 @@
                                     <td><input type="number" name="price" value="<?= $p['price'] ?>"></td>
                                     <td><input type="text" name="size" value="<?= $p['size'] ?>"></td>
                                     <td><input type="number" name="quantity" value="<?= $p['quantity'] ?>"></td>
-                                    <td><img src="/HCShopTest/public/images/<?= $p['image'] ?>" width="60"></td>
+                                    <td>
+                                        <img src="/HCShopTest/public/images/<?= $p['image'] ?>" width="60">
+                                        <div>
+                                            Chọn ảnh thay thế<input type="file" name="url" id="">
+                                        </div>
+                                    </td>
                                     <td style="display: flex; flex-direction: column; gap: 6px;">
                                         <button type="submit" class="button-action" style="background-color: #4CAF50; color: white; border: none; padding: 6px; border-radius: 4px;">📂 Lưu</button>
                                         <button type="button" class="button-action" style="background-color: #f44336; color: white; border: none; padding: 6px; border-radius: 4px;"
@@ -304,6 +309,8 @@
                         <th>Giá sản phẩm</th>
                         <th>Số lượng</th>
                         <th>Size</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -317,8 +324,36 @@
                                 <td><?= number_format($row['price'], 0, ',', '.') ?>₫</td>
                                 <td><?= $row['quantity'] ?></td>
                                 <td><?= $row['size'] ?></td>
+                                <td><?= $row['status_order'] ?></td>
+                                <td>
+                                    <button class="updateStatusBtn" data-order="<?= $row['order_id'] ?>">Cập nhật trạng thái</button>
+                                    <div id="statusModal" class="modal">
+                                        <div class="modal-content">
+                                            <form action="/HCShopTest/public/AdminController/update_order" method="post">
+                                                <span class="close">&times;</span>
+                                                <h2>Cập nhật trạng thái đơn hàng <?= $row['order_id'] ?></h2>
+                                                <input type="hidden" id="orderId" name="order_id" value="<?= $row['order_id'] ?>">
+                                                <select id="orderStatus" name="status">
+                                                    <option value="Đã xác nhận">Đã xác nhận</option>
+                                                    <option value="Đang chuẩn bị">Đang chuẩn bị</option>
+                                                    <option value="Đang vận chuyển">Đang vận chuyển</option>
+                                                    <option value="Giao hàng thành công">Giao hàng thành công</option>
+                                                    <option value="Đã hủy">Đã hủy</option>
+                                                    <option value="Đã thanh toán">Đã thanh toán</option>
+                                                    <option value="Chờ xác nhận hủy">Chờ xác nhận hủy</option>
+                                                    <option value="Đã nhận hàng">Đã nhận hàng</option>
+                                                    <option value="Chưa nhận hàng">Chưa nhận hàng</option>
+                                                </select>
+                                                <input id="confirmStatus" type="submit" name="update_status" value="Xác nhận">
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
+
+
                     <?php else: ?>
                         <tr>
                             <td colspan="7">Không có đơn hàng nào.</td>
@@ -328,67 +363,71 @@
             </table>
 
             <!-- QLy người dùng-->
-            <?php elseif ($action === 'manage-users'): ?>
-                <h2>👤 Quản lý người dùng</h2>
-                <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px; color: #000; background-color: #fff;">
-                    <thead>
-                        <tr style="background-color: #eee;">
-                            <th>ID</th>
-                            <th>Tên người dùng</th>
-                            <th>Email</th>
-                            <th>Vai trò</th>
-                            <th>Hành động</th>
+        <?php elseif ($action === 'manage-users'): ?>
+            <h2>👤 Quản lý người dùng</h2>
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px; color: #000; background-color: #fff;">
+                <thead>
+                    <tr style="background-color: #eee;">
+                        <th>ID</th>
+                        <th>Tên người dùng</th>
+                        <th>Email</th>
+                        <th>Vai trò</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($users)): ?>
+                        <?php foreach ($users as $row): ?>
+                            <tr>
+                                <td><?= $row['id'] ?></td>
+                                <td><?= $row['name'] ?></td>
+                                <td><?= $row['email'] ?></td>
+                                <td><?= $row['role'] ?></td>
+                                <td>
+                                    <a href="/HCShopTest/public/AdminController/delete_user?id=<?= $row['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                        <button style="color: red;">Xóa</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5">Không có người dùng nào.</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($users)): ?>
-                            <?php foreach ($users as $row): ?>
-                                <tr>
-                                    <td><?= $row['id'] ?></td>
-                                    <td><?= $row['name'] ?></td>
-                                    <td><?= $row['email'] ?></td>
-                                    <td><?= $row['role'] ?></td>
-                                    <td>
-                                        <a href="/HCShopTest/public/AdminController/delete_user?id=<?= $row['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
-                                            <button style="color: red;">Xóa</button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr><td colspan="5">Không có người dùng nào.</td></tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            <?php endif; ?>
-            <!--Phần Contact -->
-           <?php if ($action === 'manage-contact'): ?>
-               <h2>📩 Thông báo từ khách hàng</h2>
-               <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px auto;">
-                   <thead style="background: #eee;">
-                       <tr>
-                           <th>Tên</th>
-                           <th>Email</th>
-                           <th>Nội dung</th>
-                           <th>Ngày gửi</th>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       <?php if (!empty($contacts)): ?>
-                           <?php foreach ($contacts as $contact): ?>
-                               <tr>
-                                   <td><?= htmlspecialchars($contact['name']) ?></td>
-                                   <td><?= htmlspecialchars($contact['email']) ?></td>
-                                   <td><?= nl2br(htmlspecialchars($contact['message'])) ?></td>
-                                   <td><?= $contact['sent_at'] ?></td>
-                               </tr>
-<?php endforeach; ?>
-                       <?php else: ?>
-                           <tr><td colspan="4">Không có tin nhắn nào.</td></tr>
-                       <?php endif; ?>
-                   </tbody>
-               </table>
-           <?php endif; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+        <!--Phần Contact -->
+        <?php if ($action === 'manage-contact'): ?>
+            <h2>📩 Thông báo từ khách hàng</h2>
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 95%; margin: 20px auto;">
+                <thead style="background: #eee;">
+                    <tr>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Nội dung</th>
+                        <th>Ngày gửi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($contacts)): ?>
+                        <?php foreach ($contacts as $contact): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($contact['name']) ?></td>
+                                <td><?= htmlspecialchars($contact['email']) ?></td>
+                                <td><?= nl2br(htmlspecialchars($contact['message'])) ?></td>
+                                <td><?= $contact['sent_at'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4">Không có tin nhắn nào.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
     </div>
     <?php if (empty($action)): ?>
 
@@ -529,6 +568,20 @@
         });
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".updateStatusBtn").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.getElementById("orderId").value = this.dataset.order;
+                    document.getElementById("statusModal").style.display = "block";
+                });
+            });
+
+            document.querySelector(".close").addEventListener("click", function() {
+                document.getElementById("statusModal").style.display = "none";
+            });
+        });
+    </script>
 
 
 </body>
